@@ -7,10 +7,10 @@ export default function Home() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setDecks(title)
-    setTitle("")
+    setDecks([title].concat(decks));
+    setTitle("");
+    console.log(decks);
   };
-
   return (
     <>
       <div className="h-[50vh] w-auto bg-zinc-800 flex items-center justify-center">
@@ -30,9 +30,13 @@ export default function Home() {
           />
         </form>
       </div>
-      <div className='h-[50vh] w-screen bg-black flex items-center justify-center'>
-        <Flashcard />
-    </div>
+      <div className="h-[50vh] w-screen bg-black flex items-center justify-center">
+        <div className="w-5/6 h-5/6 bg-slate-500 flex justify-between">
+          {decks.map((deck) => (
+            <Flashcard key={deck._id} />
+          ))}
+        </div>
+      </div>
     </>
   );
 }
