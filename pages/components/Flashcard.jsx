@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-const Flashcard = () => {
+const Flashcard = (props) => {
   const [front, setFront] = useState(true);
 
   const returnCard = () => {

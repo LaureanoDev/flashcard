@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Flashcard from "./components/Flashcard";
+import { v4 as uuidv4 } from "uuid";
 
 export default function Home() {
   const [decks, setDecks] = useState([]);
@@ -12,7 +13,7 @@ export default function Home() {
     console.log(decks);
   };
   return (
-    <>
+    <div className="overflow-x-hidden bg-zinc-800 h-screen w-auto">
       <div className="h-[50vh] w-auto bg-zinc-800 flex items-center justify-center">
         <form onSubmit={handleSubmit}>
           <h1 className="text-white text-center">Enter your text</h1>
@@ -30,13 +31,14 @@ export default function Home() {
           />
         </form>
       </div>
-      <div className="h-[50vh] w-screen bg-black flex items-center justify-center">
-        <div className="w-5/6 h-5/6 bg-slate-500 flex justify-between">
+      <h1 className="text-center text-white text-2xl">Your Decks</h1>
+      <div className="h-auto w-screen bg-zinc-800 flex items-center justify-center">
+        <div className="w-auto h-auto bg-zinc-800 flex flex-col gap-3 max-w-[896px] md:grid grid-cols-2 lg:grid-cols-3">
           {decks.map((deck) => (
-            <Flashcard key={deck._id} />
+            <Flashcard key={uuidv4()} />
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 }
