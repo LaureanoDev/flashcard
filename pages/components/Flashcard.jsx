@@ -17,8 +17,10 @@ const Flashcard = (props) => {
       }
       onClick={returnCard}
     >
-      <h1 className={front ? "display" : "hidden"}>Front</h1>
-      <h1 className={front ? "hidden" : "display"}>Back</h1>
+      <div className="w-[280px] h-[110px] flex items-center justify-center">
+        <h1 className={front ? "display" : "hidden"}>Front</h1>
+        <h1 className={front ? "hidden" : "display"}>Back</h1>
+      </div>
     </div>
   );
 };
