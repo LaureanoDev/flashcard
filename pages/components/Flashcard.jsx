@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-const Flashcard = (props) => {
+const Flashcard = ({title}) => {
   const [front, setFront] = useState(true);
 
   const returnCard = () => {
@@ -18,7 +18,7 @@ const Flashcard = (props) => {
       onClick={returnCard}
     >
       <div className="w-[280px] h-[110px] flex items-center justify-center">
-        <h1 className={front ? "display" : "hidden"}>Front</h1>
+        <h1 className={front ? "display text-center overflow-hidden" : "hidden"}>{title}</h1>
         <h1 className={front ? "hidden" : "display"}>Back</h1>
       </div>
     </div>

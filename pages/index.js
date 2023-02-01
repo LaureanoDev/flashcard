@@ -8,7 +8,7 @@ export default function Home() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setDecks([title].concat(decks));
+    setDecks([...decks, { title: title, id: uuidv4() }]);
     setTitle("");
     console.log(decks);
   };
@@ -35,7 +35,7 @@ export default function Home() {
       <div className="h-auto w-screen bg-zinc-800 flex items-center justify-center">
         <div className="w-auto h-auto bg-zinc-800 flex flex-col gap-3 max-w-[896px] md:grid grid-cols-2 lg:grid-cols-3">
           {decks.map((deck) => (
-            <Flashcard key={uuidv4()} />
+            <Flashcard key={deck.id} title={deck.title} />
           ))}
         </div>
       </div>
