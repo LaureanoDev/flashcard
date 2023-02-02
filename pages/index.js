@@ -6,16 +6,25 @@ export default function Home() {
   const [decks, setDecks] = useState([]);
   const [title, setTitle] = useState("");
 
-  const handleSubmit = (e) => {
+  const createCard = (e) => {
     e.preventDefault();
-    setDecks([...decks, { title: title, id: uuidv4() }]);
-    setTitle("");
+    if (title != "") {
+      setDecks([...decks, { title: title, id: uuidv4() }]);
+      setTitle("");
+      console.log(decks);
+    }
+  };
+
+  const deleteCard = (id) => {
+    let updatedDecks = [...decks].filter((deck) => deck.id !== id);
+    setDecks(updatedDecks);
     console.log(decks);
   };
+
   return (
     <div className="overflow-x-hidden bg-zinc-800 h-screen w-auto">
       <div className="h-[50vh] w-auto bg-zinc-800 flex items-center justify-center">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={createCard}>
           <h1 className="text-white text-center">Enter your text</h1>
           <input
             type="text"
@@ -35,7 +44,12 @@ export default function Home() {
       <div className="h-auto w-screen bg-zinc-800 flex items-center justify-center">
         <div className="w-auto h-auto bg-zinc-800 flex flex-col gap-3 max-w-[896px] md:grid grid-cols-2 lg:grid-cols-3">
           {decks.map((deck) => (
-            <Flashcard key={deck.id} title={deck.title} />
+            <Flashcard
+              key={deck.id}
+              title={deck.title}
+              deleteCard={deleteCard}
+              deck={deck}
+            />
           ))}
         </div>
       </div>
