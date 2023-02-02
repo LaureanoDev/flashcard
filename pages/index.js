@@ -25,9 +25,10 @@ export default function Home() {
     <div className="overflow-x-hidden bg-zinc-800 h-screen w-auto">
       <div className="h-[50vh] w-auto bg-zinc-800 flex items-center justify-center">
         <form onSubmit={createCard}>
-          <h1 className="text-white text-center">Enter your text</h1>
           <input
             type="text"
+            className="rounded p-5 outline-none placeholder:focus:text-[#222] placeholder:transition duration-300 ease-in "
+            placeholder="Enter Text"
             value={title}
             onChange={(e) => {
               setTitle(e.target.value);
