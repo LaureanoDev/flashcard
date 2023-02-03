@@ -2,16 +2,21 @@ import React from "react";
 import { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { RiPencilFill } from "react-icons/ri";
+import { motion } from "framer-motion";
 
 const Flashcard = ({ deck, title, deleteCard }) => {
   const [front, setFront] = useState(true);
+  const [isEditing, setIsEditing] = useState(false);
 
   const returnCard = () => {
-    setFront(!front);
+    if (!isEditing) {
+      setFront(!front);
+    }
   };
 
   return (
-    <div
+    <motion.div
+      whileHover={{ scale: 1.1}}
       className={
         front
           ? "h-32 w-72 bg-red-50 rounded-sm cursor-pointer flex flex-col justify-center"
@@ -19,7 +24,7 @@ const Flashcard = ({ deck, title, deleteCard }) => {
       }
     >
       <div className="h-[20%] w-72 shadow-lg flex items-center justify-end gap-2">
-        <RiPencilFill />
+        <RiPencilFill onClick={() => setIsEditing(!isEditing)} type="submit" />
         <AiOutlineClose onClick={() => deleteCard(deck.id)} />
       </div>
       <div
@@ -27,17 +32,28 @@ const Flashcard = ({ deck, title, deleteCard }) => {
         onClick={returnCard}
       >
         <h1
-          className={front ? "display text-center overflow-hidden" : "hidden"}
+          className={
+            front && !isEditing
+              ? "display text-center overflow-hidden"
+              : "hidden"
+          }
         >
           {title}
         </h1>
+
+        <input
+          type="text"
+          className={isEditing ? "rounded border-none" : "hidden"}
+          placeholder="Edit text"
+        />
+
         <h1
           className={front ? "hidden" : "display text-center overflow-hidden"}
         >
           Back
         </h1>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
