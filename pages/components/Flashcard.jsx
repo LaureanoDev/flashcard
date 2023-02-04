@@ -24,8 +24,8 @@ const Flashcard = ({ deck, title, deleteCard }) => {
       }
     >
       <div className="h-[20%] w-72 shadow-lg flex items-center justify-end gap-2">
-        <RiPencilFill onClick={() => setIsEditing(!isEditing)} type="submit" />
-        <AiOutlineClose onClick={() => deleteCard(deck.id)} />
+        <RiPencilFill onClick={() => setIsEditing(!isEditing)} type="submit" className="hover:text-blue-500"/>
+        <AiOutlineClose onClick={() => deleteCard(deck.id)} className="hover:text-red-500"/>
       </div>
       <div
         className="h-[80%] w-72 flex items-center justify-center"
@@ -43,7 +43,7 @@ const Flashcard = ({ deck, title, deleteCard }) => {
 
         <input
           type="text"
-          className={isEditing ? "rounded border-none" : "hidden"}
+          className={isEditing ? "rounded border-none bg-transparent" : "hidden"}
           placeholder="Edit text"
         />
 
