@@ -5,6 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 export default function Home() {
   const [decks, setDecks] = useState([]);
   const [title, setTitle] = useState("");
+  const [newtitle, setNewTitle] = useState("");
 
   const createCard = (e) => {
     e.preventDefault();
@@ -20,6 +21,11 @@ export default function Home() {
     setDecks(updatedDecks);
     console.log(decks);
   };
+
+  const editCard = (id) => {
+    let index = [...decks].indexOf(id)
+    console.log(index)
+  }
 
   return (
     <div className="overflow-x-hidden bg-zinc-800 h-screen w-auto">
@@ -49,6 +55,7 @@ export default function Home() {
               key={deck.id}
               title={deck.title}
               deleteCard={deleteCard}
+              editCard={editCard}
               deck={deck}
             />
           ))}
