@@ -4,7 +4,15 @@ import { AiOutlineClose, AiOutlineCheck } from "react-icons/ai";
 import { RiPencilFill } from "react-icons/ri";
 import { motion } from "framer-motion";
 
-const Flashcard = ({ deck, title, deleteCard, editCard, setNewTitle, newTitle, setNewName }) => {
+const Flashcard = ({
+  deck,
+  title,
+  deleteCard,
+  editCard,
+  setNewTitle,
+  newTitle,
+  setNewName,
+}) => {
   const [front, setFront] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -15,9 +23,9 @@ const Flashcard = ({ deck, title, deleteCard, editCard, setNewTitle, newTitle, s
   };
 
   const clickCheck = () => {
-    !isEditing;
-    setNewName(newTitle)
-    editCard(deck.id)
+    editCard(deck.id);
+    setIsEditing(!isEditing);
+    setNewName(newTitle);
   };
 
   return (

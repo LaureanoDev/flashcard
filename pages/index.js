@@ -25,9 +25,9 @@ export default function Home() {
 
   const editCard = (id) => {
     let cardIndex = [...decks].findIndex((deck) => deck.id == id);
-    decks[cardIndex].title = newName; 
+    decks[cardIndex].title = newName;
+    setDecks(decks);
     console.log(decks);
-    setDecks(decks)
   };
 
   return (
@@ -46,7 +46,7 @@ export default function Home() {
           <input
             type="submit"
             value="Send"
-            className="ml-2 text-white cursor-pointer"
+            className="h-[64px] bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow cursor-pointer"
           />
         </form>
       </div>
