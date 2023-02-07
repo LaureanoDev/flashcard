@@ -4,7 +4,7 @@ import { AiOutlineClose, AiOutlineCheck } from "react-icons/ai";
 import { RiPencilFill } from "react-icons/ri";
 import { motion } from "framer-motion";
 
-const Flashcard = ({ deck, title, deleteCard, editCard }) => {
+const Flashcard = ({ deck, title, deleteCard, editCard, setNewTitle, newTitle, setNewName }) => {
   const [front, setFront] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -12,6 +12,12 @@ const Flashcard = ({ deck, title, deleteCard, editCard }) => {
     if (!isEditing) {
       setFront(!front);
     }
+  };
+
+  const clickCheck = () => {
+    !isEditing;
+    setNewName(newTitle)
+    editCard(deck.id)
   };
 
   return (
@@ -31,8 +37,9 @@ const Flashcard = ({ deck, title, deleteCard, editCard }) => {
         />
         <AiOutlineCheck
           className={isEditing ? "hover:text-green-700" : "hidden"}
-          onClick={() => setIsEditing(!isEditing)}
+          onClick={clickCheck}
         />
+
         <AiOutlineClose
           onClick={() => deleteCard(deck.id)}
           className="hover:text-red-500"
@@ -54,8 +61,11 @@ const Flashcard = ({ deck, title, deleteCard, editCard }) => {
         <input
           type="text"
           className={
-            isEditing ? "rounded border-none bg-transparent" : "hidden"
+            isEditing
+              ? "rounded border-none bg-transparent outline-none"
+              : "hidden"
           }
+          onChange={(e) => setNewTitle(e.target.value)}
           placeholder="Edit text"
         />
 
