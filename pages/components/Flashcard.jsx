@@ -6,12 +6,11 @@ import { motion } from "framer-motion";
 
 const Flashcard = ({
   deck,
+  decks,
   title,
   deleteCard,
   editCard,
   setNewTitle,
-  newTitle,
-  setNewName,
 }) => {
   const [front, setFront] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
@@ -25,7 +24,7 @@ const Flashcard = ({
   const clickCheck = () => {
     editCard(deck.id);
     setIsEditing(!isEditing);
-    setNewName(newTitle);
+    console.log(decks);
   };
 
   return (

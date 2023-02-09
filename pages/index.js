@@ -1,12 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Flashcard from "./components/Flashcard";
 import { v4 as uuidv4 } from "uuid";
+import { useForceUpdate } from "framer-motion";
 
 export default function Home() {
   const [decks, setDecks] = useState([]);
   const [title, setTitle] = useState("");
   const [newTitle, setNewTitle] = useState("");
-  const [newName, setNewName] = useState("");
 
   const createCard = (e) => {
     e.preventDefault();
@@ -25,9 +25,10 @@ export default function Home() {
 
   const editCard = (id) => {
     let cardIndex = [...decks].findIndex((deck) => deck.id == id);
-    decks[cardIndex].title = newName;
+    if (newTitle != "") {
+      [...decks][cardIndex].title = newTitle;
+    }
     setDecks(decks);
-    console.log(decks);
   };
 
   return (
@@ -57,13 +58,12 @@ export default function Home() {
             <Flashcard
               key={deck.id}
               title={deck.title}
+              decks={decks}
               deleteCard={deleteCard}
               editCard={editCard}
               deck={deck}
               setNewTitle={setNewTitle}
               newTitle={newTitle}
-              newName={newName}
-              setNewName={setNewName}
             />
           ))}
         </div>
