@@ -10,21 +10,23 @@ const Flashcard = ({
   title,
   deleteCard,
   editCard,
-  setNewTitle,
+  setNewFront,
 }) => {
   const [front, setFront] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
 
   const returnCard = () => {
-    if (!isEditing) {
+    if (isEditing == false) {
       setFront(!front);
+      console.log(isEditing)
     }
   };
 
   const clickCheck = () => {
     editCard(deck.id);
-    setIsEditing(!isEditing);
-    console.log(decks);
+    setIsEditing(false);
+    setNewFront("");
+    console.log(isEditing);
   };
 
   return (
@@ -38,12 +40,12 @@ const Flashcard = ({
     >
       <div className="h-[20%] w-72 shadow-lg flex items-center justify-end gap-2">
         <RiPencilFill
-          onClick={() => setIsEditing(!isEditing)}
+          onClick={() => setIsEditing(true)}
           type="submit"
-          className={!isEditing ? "hover:text-blue-500" : "hidden"}
+          className={!isEditing && front ? "hover:text-blue-500" : "hidden"}
         />
         <AiOutlineCheck
-          className={isEditing ? "hover:text-green-700" : "hidden"}
+          className={isEditing || !front ? "hover:text-green-700" : "hidden"}
           onClick={clickCheck}
         />
 
@@ -72,14 +74,18 @@ const Flashcard = ({
               ? "rounded border-none bg-transparent outline-none"
               : "hidden"
           }
-          onChange={(e) => setNewTitle(e.target.value)}
+          onChange={(e) => setNewFront(e.target.value)}
           placeholder="Edit text"
         />
 
         <h1
           className={front ? "hidden" : "display text-center overflow-hidden"}
         >
-          Back
+          <input
+            type="text"
+            placeholder="Enter your back"
+            className={!front ? "rounded border-none bg-transparent outline-none" : "hidden"}
+          />
         </h1>
       </div>
     </motion.div>
