@@ -6,12 +6,12 @@ export default function Home() {
   const [decks, setDecks] = useState([]);
   const [title, setTitle] = useState("");
   const [newFront, setNewFront] = useState("");
-  const [Back, setBack] = useState("");
+  const [back, setBack] = useState("");
 
   const createCard = (e) => {
     e.preventDefault();
     if (title != "") {
-      setDecks([...decks, { title: title, id: uuidv4() }]);
+      setDecks([...decks, { title: title, back: back, id: uuidv4() }]);
       setTitle("");
       console.log(decks);
     }
@@ -27,6 +27,16 @@ export default function Home() {
     let cardIndex = [...decks].findIndex((deck) => deck.id == id);
     if (newFront != "") {
       [...decks][cardIndex].title = newFront;
+      setNewFront("");
+    }
+    setDecks(decks);
+  };
+
+  const setBackCard = (id) => {
+    let cardIndex = [...decks].findIndex((deck) => deck.id == id);
+    if (back != "") {
+      [...decks][cardIndex].back = back;
+      setBack("") 
     }
     setDecks(decks);
   };
@@ -64,6 +74,9 @@ export default function Home() {
               deck={deck}
               setNewFront={setNewFront}
               newFront={newFront}
+              back={deck.back}
+              setBack={setBack}
+              setBackCard={setBackCard}
             />
           ))}
         </div>

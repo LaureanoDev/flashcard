@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AiOutlineClose, AiOutlineCheck } from "react-icons/ai";
 import { RiPencilFill } from "react-icons/ri";
 import { motion } from "framer-motion";
@@ -11,6 +11,9 @@ const Flashcard = ({
   deleteCard,
   editCard,
   setNewFront,
+  back,
+  setBack,
+  setBackCard,
 }) => {
   const [front, setFront] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
@@ -18,34 +21,37 @@ const Flashcard = ({
   const returnCard = () => {
     if (isEditing == false) {
       setFront(!front);
-      console.log(isEditing)
     }
   };
 
   const clickCheck = () => {
     editCard(deck.id);
     setIsEditing(false);
-    setNewFront("");
-    console.log(isEditing);
+    setBackCard(deck.id);
+    
   };
+
+  useEffect(() => {
+    console.log(front, isEditing);
+  }, [front, isEditing]);
 
   return (
     <motion.div
       whileHover={{ scale: 1.1 }}
       className={
         front
-          ? "h-32 w-72 bg-red-50 rounded-sm cursor-pointer flex flex-col justify-center"
-          : "h-32 w-72 bg-green-400 rounded-sm cursor-pointer flex flex-col justify-center"
+          ? "h-32 w-72 bg-red-50 rounded-lg cursor-pointer flex flex-col justify-center"
+          : "h-32 w-72 bg-red-50 rounded-lg cursor-pointer flex flex-col justify-center"
       }
     >
       <div className="h-[20%] w-72 shadow-lg flex items-center justify-end gap-2">
         <RiPencilFill
           onClick={() => setIsEditing(true)}
           type="submit"
-          className={!isEditing && front ? "hover:text-blue-500" : "hidden"}
+          className={!isEditing ? "hover:text-blue-500" : "hidden"}
         />
         <AiOutlineCheck
-          className={isEditing || !front ? "hover:text-green-700" : "hidden"}
+          className={isEditing ? "hover:text-green-700" : "hidden"}
           onClick={clickCheck}
         />
 
@@ -55,12 +61,14 @@ const Flashcard = ({
         />
       </div>
       <div
-        className="h-[80%] w-72 flex items-center justify-center"
+        className={
+          front ? "h-[80%] w-72 flex items-center justify-center" : "hidden"
+        }
         onClick={returnCard}
       >
         <h1
           className={
-            front && !isEditing
+            !isEditing && front
               ? "display text-center overflow-hidden"
               : "hidden"
           }
@@ -70,23 +78,38 @@ const Flashcard = ({
         <input
           type="text"
           className={
-            isEditing
+            isEditing && front == true
               ? "rounded border-none bg-transparent outline-none"
               : "hidden"
           }
           onChange={(e) => setNewFront(e.target.value)}
           placeholder="Edit text"
         />
-
+      </div>
+      <div
+        className={
+          front == false
+            ? "h-[80%] w-72 flex items-center justify-center"
+            : "hidden"
+        }
+        onClick={returnCard}
+      >
         <h1
           className={front ? "hidden" : "display text-center overflow-hidden"}
         >
-          <input
-            type="text"
-            placeholder="Enter your back"
-            className={!front ? "rounded border-none bg-transparent outline-none" : "hidden"}
-          />
+          {back}
         </h1>
+        <input
+          type="text"
+          placeholder="Enter your back"
+          className={
+            front == false && isEditing == true
+              ? "rounded border-none bg-transparent outline-none"
+              : "hidden"
+          }
+          onFocus={() => setIsEditing(true)}
+          onChange={(e) => setBack(e.target.value)}
+        />
       </div>
     </motion.div>
   );
