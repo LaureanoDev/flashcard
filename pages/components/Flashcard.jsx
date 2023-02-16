@@ -28,20 +28,15 @@ const Flashcard = ({
     editCard(deck.id);
     setIsEditing(false);
     setBackCard(deck.id);
-    
   };
-
-  useEffect(() => {
-    console.log(front, isEditing);
-  }, [front, isEditing]);
 
   return (
     <motion.div
       whileHover={{ scale: 1.1 }}
       className={
         front
-          ? "h-32 w-72 bg-red-50 rounded-lg cursor-pointer flex flex-col justify-center"
-          : "h-32 w-72 bg-red-50 rounded-lg cursor-pointer flex flex-col justify-center"
+          ? "h-32 w-72 bg-red-50 rounded-lg cursor-pointer flex flex-col justify-center shadow-xl shadow-zinc-900"
+          : "min-h-[8rem] h-auto w-72 bg-green-400 rounded-lg cursor-pointer flex flex-col justify-center"
       }
     >
       <div className="h-[20%] w-72 shadow-lg flex items-center justify-end gap-2">
@@ -65,11 +60,12 @@ const Flashcard = ({
           front ? "h-[80%] w-72 flex items-center justify-center" : "hidden"
         }
         onClick={returnCard}
+        transition={{ layout: { duration: 1, type: "spring" } }}
       >
         <h1
           className={
             !isEditing && front
-              ? "display text-center overflow-hidden"
+              ? "display text-center overflow-auto max-h-[96px]"
               : "hidden"
           }
         >
@@ -92,10 +88,15 @@ const Flashcard = ({
             ? "h-[80%] w-72 flex items-center justify-center"
             : "hidden"
         }
+        transition={{ layout: { duration: 1, type: "spring" } }}
         onClick={returnCard}
       >
         <h1
-          className={front ? "hidden" : "display text-center overflow-hidden"}
+          className={
+            front || isEditing
+              ? "hidden"
+              : "display text-center overflow-auto max-h-[96px]"
+          }
         >
           {back}
         </h1>
