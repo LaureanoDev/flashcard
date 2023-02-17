@@ -61,14 +61,13 @@ export default function Home() {
           />
         </form>
       </div>
-      <h1 className="text-center text-white text-2xl">Your Decks</h1>
+      <h1 className="text-center text-white text-2xl">Your Cards</h1>
       <div className=" h-auto w-screen bg-slate-900 flex items-center justify-center">
         <div className="w-auto h-auto bg-slate-900 flex flex-col gap-5 max-w-[896px] md:grid grid-cols-2 lg:grid-cols-3">
           {decks.map((deck) => (
             <Flashcard
               key={deck.id}
               title={deck.title}
-              decks={decks}
               deleteCard={deleteCard}
               editCard={editCard}
               deck={deck}

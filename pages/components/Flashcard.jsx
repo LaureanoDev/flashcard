@@ -1,12 +1,11 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { AiOutlineClose, AiOutlineCheck } from "react-icons/ai";
 import { RiPencilFill } from "react-icons/ri";
 import { motion } from "framer-motion";
 
 const Flashcard = ({
   deck,
-  decks,
   title,
   deleteCard,
   editCard,
@@ -19,7 +18,7 @@ const Flashcard = ({
   const [isEditing, setIsEditing] = useState(false);
 
   const returnCard = () => {
-    if (isEditing == false) {
+    if (isEditing === false) {
       setFront(!front);
     }
   };
@@ -33,13 +32,23 @@ const Flashcard = ({
   return (
     <motion.div
       whileHover={{ scale: 1.1 }}
+      animate={{
+        rotateY: front ? 0 : 180,
+      }}
+      transition={{duration: 0.5}}
       className={
         front
-          ? "h-32 w-72 bg-red-50 rounded-lg cursor-pointer flex flex-col justify-center shadow-xl shadow-zinc-900"
-          : "min-h-[8rem] h-auto w-72 bg-green-400 rounded-lg cursor-pointer flex flex-col justify-center"
+          ? "h-32 w-72 bg-red-50  rounded-lg cursor-pointer flex flex-col justify-center shadow-xl shadow-zinc-900"
+          : "min-h-[8rem] h-auto w-72 bg-green-400  rounded-lg cursor-pointer flex flex-col justify-center"
       }
     >
-      <div className="h-[20%] w-72 shadow-lg flex items-center justify-end gap-2">
+      <motion.div className="h-[20%] w-72 shadow-lg flex items-center justify-end gap-2"
+      animate={{
+        rotateY: front ? 0 : 180,
+      }}
+      transition={{duration: 0.5}}
+      >
+        <input type="color" className="h-4 w-4" />
         <RiPencilFill
           onClick={() => setIsEditing(true)}
           type="submit"
@@ -54,7 +63,7 @@ const Flashcard = ({
           onClick={() => deleteCard(deck.id)}
           className="hover:text-red-500"
         />
-      </div>
+      </motion.div>
       <div
         className={
           front ? "h-[80%] w-72 flex items-center justify-center" : "hidden"
@@ -82,13 +91,17 @@ const Flashcard = ({
           placeholder="Edit text"
         />
       </div>
-      <div
+      <motion.div
+      
         className={
           front == false
             ? "h-[80%] w-72 flex items-center justify-center"
             : "hidden"
         }
         transition={{ layout: { duration: 1, type: "spring" } }}
+        animate={{
+        rotateY: front ? 0 : 180,
+      }}
         onClick={returnCard}
       >
         <h1
@@ -111,7 +124,7 @@ const Flashcard = ({
           onFocus={() => setIsEditing(true)}
           onChange={(e) => setBack(e.target.value)}
         />
-      </div>
+      </motion.div>
     </motion.div>
   );
 };
