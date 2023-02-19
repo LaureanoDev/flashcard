@@ -44,10 +44,10 @@ export default function Home() {
   return (
     <div className="overflow-x-hidden bg-slate-900 h-screen w-auto">
       <div className="h-[50vh] w-auto bg-slate-900 flex items-center justify-center">
-        <form onSubmit={createCard}>
+        <form onSubmit={createCard} className="flex max-[331px]:flex-col">
           <input
             type="text"
-            className="rounded p-5 outline-none placeholder:focus:text-[#222] placeholder:transition duration-300 ease-in "
+            className="rounded p-5 outline-none placeholder:focus:text-[#222] placeholder:transition duration-300 ease-in"
             placeholder="Enter Text"
             value={title}
             onChange={(e) => {

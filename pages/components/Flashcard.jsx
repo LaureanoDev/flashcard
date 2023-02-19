@@ -35,18 +35,19 @@ const Flashcard = ({
       animate={{
         rotateY: front ? 0 : 180,
       }}
-      transition={{duration: 0.5}}
+      transition={{ duration: 0.5 }}
       className={
         front
           ? "h-32 w-72 bg-red-50  rounded-lg cursor-pointer flex flex-col justify-center shadow-xl shadow-zinc-900"
-          : "min-h-[8rem] h-auto w-72 bg-green-400  rounded-lg cursor-pointer flex flex-col justify-center"
+          : "min-h-[8rem] h-32 w-72 bg-green-400  rounded-lg cursor-pointer flex flex-col justify-center"
       }
     >
-      <motion.div className="h-[20%] w-72 shadow-lg flex items-center justify-end gap-2"
-      animate={{
-        rotateY: front ? 0 : 180,
-      }}
-      transition={{duration: 0.5}}
+      <motion.div
+        className="h-[20%] w-72 shadow-lg flex items-center justify-end gap-2"
+        animate={{
+          rotateY: front ? 0 : 180,
+        }}
+        transition={{ duration: 0.5 }}
       >
         <input type="color" className="h-4 w-4" />
         <RiPencilFill
@@ -92,16 +93,15 @@ const Flashcard = ({
         />
       </div>
       <motion.div
-      
         className={
           front == false
             ? "h-[80%] w-72 flex items-center justify-center"
             : "hidden"
         }
-        transition={{ layout: { duration: 1, type: "spring" } }}
+        transition={{ layout: { duration: 1, type: "inertia" } }}
         animate={{
-        rotateY: front ? 0 : 180,
-      }}
+          rotateY: front ? 0 : 180,
+        }}
         onClick={returnCard}
       >
         <h1
